@@ -1,9 +1,87 @@
-# White สวัสดีจร้านี่ ไวท์เองนะ
-# โค้ดนี้คือโค้ดใช่ ยิงเท่านั้นนะ^^
-git clone https://github.com/kongpun1/SMS
-cd run= [ใส่เบอร์ที่ต้องการยิง]
-[เลือกว่าจะยิงอะไรเช่น ข้อความ|โทร|ทั้งหมด]
-เช่น php run= 0930000000 ทั้งหมด
-# ขอบคุณที่อ่านนะ อย่าลืมเป็นแฟนคลับ ไวท์นะคะ
-# แฟนคลับ ไวท์คือ โรสซึ นะล้อเล่นค่ะ555
-
+def copy():
+    print(Colorate.Horizontal(Colors.green_to_yellow,"กำลังเข้าโปรแกรมดูดคริป-ดูดภาพ!!"))
+    time.sleep(1.5)
+    os.system("clear")
+    print(Colorate.Horizontal(Colors.blue_to_purple,"▁  "))
+    time.sleep(0.5)
+    os.system("clear")
+    print(Colorate.Horizontal(Colors.blue_to_purple,"▁ ▂ "))
+    time.sleep(0.5)
+    os.system("clear")
+    print(Colorate.Horizontal(Colors.blue_to_purple,"▁ ▂ ▃ "))
+    time.sleep(0.5)
+    os.system("clear")
+    print(Colorate.Horizontal(Colors.blue_to_purple,"▁ ▂ ▃ ▄"))
+    time.sleep(0.5)
+    os.system("clear")
+    print(Colorate.Horizontal(Colors.blue_to_purple,"▁ ▂ ▃ ▄ ▅"))
+    time.sleep(0.5)
+    os.system("clear")
+    print(Colorate.Horizontal(Colors.blue_to_purple,"▁ ▂ ▃ ▄ ▅ ▆"))
+    time.sleep(0.5)
+    os.system("clear")
+    print(Colorate.Horizontal(Colors.blue_to_purple,"▁ ▂ ▃ ▄ ▅ ▆ ▇"))
+    time.sleep(1)
+    os.system("clear")
+    print(rainbowbanner)
+    print(Colorate.Horizontal(Colors.red_to_yellow, "*********************************************************************"))
+    print()
+    print(Colorate.Horizontal(Colors.purple_to_red, "                     [1] Copy Videos"))
+    print(Colorate.Horizontal(Colors.purple_to_red, "                     [2] Copy Message"))
+    print()
+    print(Colorate.Horizontal(Colors.red_to_yellow, "*********************************************************************"))
+    print()
+    select = input(Colorate.Horizontal(Colors.purple_to_red, "   SELECT MODE > "))
+    if select == "1":
+        system("clear")
+        print(rainbowbanner)
+        print()
+        token = input(Colorate.Horizontal(Colors.purple_to_red, "   INPUT TOKEN > "))
+        ch = input(Colorate.Horizontal(Colors.purple_to_red, "   INPUT CHANNEL(ID) > ")); ww = input(Colorate.Horizontal(Colors.purple_to_red, "   INPUT WEBHOOK > "))
+        print()
+        res = requests.get(f"https://discord.com/api/v9/channels/{ch}/messages?limit=100",headers={"authorization": token})
+        data = json.loads(res.text)
+        if res.status_code == 403:
+            print(Colorate.Horizontal(Colors.green_to_red, "    [ INFO ] Error Permission ! || status_code 403"))
+        elif res.status_code == 401:
+            print(Colorate.Horizontal(Colors.green_to_red, "    [ INFO ] Error Invild Tokens ! || status_code 401"))
+        else:
+            try:
+                if res.json()['code'] == 10003:
+                    print(Colorate.Horizontal(Colors.green_to_red, "    [ INFO ] CHANNEL ERROR ! || status_code 404 "))
+                elif res.json()['code'] == 50035:
+                    print(Colorate.Horizontal(Colors.green_to_red, "    [ INFO ] CHANNEL ERROR ! || status_code 404 "))
+            except:
+                for db in data:
+                    try:
+                        for vedio in db['attachments']:
+                            print(Colorate.Horizontal(Colors.green_to_red, f" {vedio['url']}")); requests.post(ww,json={'content': vedio['url']})
+                    except:
+                        print(Colorate.Horizontal(Colors.green_to_red, "    [ INFO ] Error Link Not || status_code 200 no"))
+                        break
+    elif select == "2":                               
+                    os.system("clear")
+                    print(rainbowbanner)
+                    print()
+                    token = input(Colorate.Horizontal(Colors.purple_to_red, "   INPUT TOKEN > "))
+                    ch = input(Colorate.Horizontal(Colors.purple_to_red, "   INPUT CHANNEL(ID) > "))
+                    print()
+                    res = requests.get(f"https://discord.com/api/v9/channels/{ch}/messages?limit=100",headers={"authorization": token})
+                    data = json.loads(res.text)
+                    if res.status_code == 403:
+                        print(Colorate.Horizontal(Colors.green_to_red, "    [ INFO ] Error Permission ! || status_code 403"))
+                    elif res.status_code == 401:
+                        print(Colorate.Horizontal(Colors.green_to_red, "    [ INFO ] Error Invild Tokens ! || status_code 401"))
+                    else:
+                        try:
+                            if res.json()['code'] == 10003:
+                                print(Colorate.Horizontal(Colors.green_to_red, "    [ INFO ] CHANNEL ERROR ! || status_code 404 "))
+                            elif res.json()['code'] == 50035:
+                                print(Colorate.Horizontal(Colors.green_to_red, "    [ INFO ] CHANNEL ERROR ! || status_code 404 "))
+                        except:                     
+                           for db in data:
+                               try:
+                                   print(Colorate.Horizontal(Colors.green_to_red, f" {db['content']}"))
+                               except:
+                                   print(Colorate.Horizontal(Colors.green_to_red, "    [ INFO ] Error Link Not || status_code 200 no"))
+                                   break
